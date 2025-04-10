@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Видео-фон сайт</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      object-fit: cover;
+    }
+
+    .overlay-video {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 100px 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+    }
+
+    .content h1 {
+      margin-bottom: 20px;
+    }
+
+    .content img {
+      max-width: 100%;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Фоновое видео -->
+  <video class="background-video" autoplay muted loop>
+    <source src="wing_back.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+
+  <!-- Видео-заголовок (WebM) -->
+  <video class="overlay-video" autoplay muted loop>
+    <source src="title.webm" type="video/webm">
+    Ваш браузер не поддерживает видео.
+  </video>
+
+<!-- Контент -->
+  <div class="content">
+    <h1>Дорогие игроки Aion, здравствуйте.</h1>
+    <p>Это команда разработчиков Aion. Сегодня мы подготовили это сообщение, чтобы заранее сообщить вам об изменениях, которые произойдут в одном из будущих обновлений, касающихся Люминеса, а также магических камней и божественных камней.</p>
+    <img src="image1.jpg" alt="Картинка 1">
+    <h1>Изменения Люминеса</h1>
+    <p>Класс Люминес был задуман как дамагер, способный быстро наносить мощный урон, и в этом аспекте он завоевал большую любовь игроков.
+Однако по сравнению с другими классами, у Люминеса слишком высокая устойчивость урона (sustained DPS) и слишком легко достигается минимальная эффективность, из-за чего постоянно поднимается вопрос баланса.
+Особенно в составе групп для подземелий и рейдов чрезмерное предпочтение этого класса стало сказываться на разнообразии в игре, и мы хотим учесть обратную связь от игроков по этому поводу.</p>
+    <img src="image2.jpg" alt="Картинка 2">
+  </div>
+
+</body>
+</html>
