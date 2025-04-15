@@ -13,7 +13,6 @@
       height: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      user-select: none; /* Отключаем выделение текста */
     }
 
     /* Видео фон */
@@ -115,31 +114,15 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Блюр */
-    .blurred {
-      filter: blur(5px);
-      pointer-events: none; /* Чтобы не было возможных кликов по размытым элементам */
-      transition: filter 0.3s ease;
-    }
   </style>
 </head>
 <body>
 
   <!-- Видео фон -->
   <div class="background-video-wrapper">
-    <script>
-      const videoSrc = atob("d2luZ19iYWNrLm1wNA=="); // "wing_back.mp4"
-
-      const videoTag = document.createElement("video");
-      videoTag.autoplay = true;
-      videoTag.loop = true;
-      videoTag.muted = true;
-      videoTag.playsInline = true;
-      videoTag.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
-
-      document.querySelector(".background-video-wrapper").appendChild(videoTag);
-    </script>
+    <video autoplay loop muted playsinline>
+      <source src="wing_back.mp4" type="video/mp4" />
+    </video>
   </div>
 
   <!-- Затемнение -->
@@ -154,12 +137,8 @@
 
     <div class="gallery">
       <div class="image-container">
-        <script>
-          const imgSrc = atob("MS5wbmc="); // "1.png"
-          document.querySelector(".background-img").src = imgSrc;
-        </script>
-        <img src="" class="background-img" alt="Фон 1">
-
+        <img src="1.png" class="background-img" alt="Фон 1">
+        
         <!-- Кнопка Telegram -->
         <a href="https://t.me/yourchannel" target="_blank" class="telegram-button">
           <img src="tg.png" alt="Telegram">
@@ -182,73 +161,6 @@
 
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
-
-    // Отключение правой кнопки мыши
-    document.addEventListener('contextmenu', (event) => {
-      event.preventDefault();
-      alert('Копирование контента заблокировано!');
-    });
-
-    // Блокировка клавиш для Print Screen и других
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'PrintScreen' || event.keyCode === 44) {
-        event.preventDefault();
-        alert('Скриншоты заблокированы!');
-      }
-      
-      // Применение блюра при нажатии любой клавиши
-      document.body.classList.add('blurred');
-      
-      // Убираем блюр через 1 секунду
-      setTimeout(() => {
-        document.body.classList.remove('blurred');
-      }, 2000);
-    });
-
-    (function() {
-      let isBlocked = false;
-
-      function blockContent() {
-        if (isBlocked) return;
-        isBlocked = true;
-        document.body.innerHTML = '';
-        document.write('<h1 style="color:red; text-align:center; margin-top:40vh;">Доступ запрещён</h1>');
-      }
-
-      // Обнаружение DevTools по изменению размеров окна
-      setInterval(() => {
-        const devtoolsOpen =
-          window.outerWidth - window.innerWidth > 160 ||
-          window.outerHeight - window.innerHeight > 160;
-
-        if (devtoolsOpen) {
-          blockContent();
-        }
-      }, 1000);
-
-      // Попытка открыть код через Ctrl+U
-      window.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey && e.key === 'u') || e.key === 'F12') {
-          e.preventDefault();
-          blockContent();
-        }
-      });
-
-      // Открытие инспектора через контекстное меню
-      window.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-      });
-
-      // Обнаружение через консоль
-      let element = new Image();
-      Object.defineProperty(element, 'id', {
-        get: function () {
-          blockContent();
-        }
-      });
-
-      console.log(element);
-    })();
   </script>
 </body>
 </html>
