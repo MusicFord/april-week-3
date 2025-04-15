@@ -13,6 +13,7 @@
       height: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      user-select: none; /* Отключаем выделение текста */
     }
 
     /* Видео фон */
@@ -114,6 +115,13 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Блюр */
+    .blurred {
+      filter: blur(5px);
+      pointer-events: none; /* Чтобы не было возможных кликов по размытым элементам */
+      transition: filter 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -160,6 +168,28 @@
       }, { threshold: 0.1 });
 
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+
+    // Отключение правой кнопки мыши
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      alert('Копирование контента заблокировано!');
+    });
+
+    // Блокировка клавиш для Print Screen и других
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'PrintScreen' || event.keyCode === 44) {
+        event.preventDefault();
+        alert('Скриншоты заблокированы!');
+      }
+      
+      // Применение блюра при нажатии любой клавиши
+      document.body.classList.add('blurred');
+      
+      // Убираем блюр через 1 секунду
+      setTimeout(() => {
+        document.body.classList.remove('blurred');
+      }, 1000);
     });
   </script>
 </body>
