@@ -13,7 +13,6 @@
       height: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
-    /* запасной фон */
     }
 
     /* Видео фон */
@@ -42,12 +41,10 @@
       z-index: -1;
     }
 
-    /* Отступ вниз — вступительный экран */
     .spacer {
       height: 100vh;
     }
 
-    /* Масштабирование содержимого */
     .scaled-content-wrapper {
       transform: scale(0.9);
       transform-origin: top center;
@@ -71,8 +68,7 @@
     .image-container {
       position: relative;
       width: 75%;
-      cursor: default;
-      z-index: 20; /* повыше overlay и всего прочего */
+      z-index: 20;
     }
 
     .background-img {
@@ -80,11 +76,34 @@
       display: block;
       border-radius: 10px;
       border: 3px solid #fff;
-      position: relative;
-      z-index: 20;
     }
 
-    /* Fade-in анимация */
+    /* Telegram кнопка */
+    .telegram-button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: 64px;
+      height: 64px;
+      display: block;
+    }
+
+    .telegram-button img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .telegram-button img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    }
+
+    /* Анимация появления */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -95,28 +114,11 @@
       opacity: 1;
       transform: translateY(0);
     }
-        .social-link {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.social-link img {
-  width: 300px;
-  height: 300px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.social-link img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
   </style>
 </head>
 <body>
 
-  <!-- Видео -->
+  <!-- Видео фон -->
   <div class="background-video-wrapper">
     <video autoplay loop muted playsinline>
       <source src="wing_back.mp4" type="video/mp4" />
@@ -126,21 +128,26 @@
   <!-- Затемнение -->
   <div class="overlay"></div>
 
-  <!-- Экран-заставка -->
+  <!-- Заставка -->
   <div class="spacer"></div>
 
-  <!-- Основной контент -->
+  <!-- Контент -->
   <div class="scaled-content-wrapper">
     <h2 class="fade-in">made_by_MusicFord</h2>
 
     <div class="gallery">
       <div class="image-container">
         <img src="1.png" class="background-img" alt="Фон 1">
+        
+        <!-- Кнопка Telegram -->
+        <a href="https://t.me/yourchannel" target="_blank" class="telegram-button">
+          <img src="tg.png" alt="Telegram">
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Скрипт для анимации появления -->
+  <!-- Скрипт появления -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const observer = new IntersectionObserver((entries, obs) => {
@@ -155,10 +162,5 @@
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
   </script>
-<div class="social-link">
-  <a href="https://t.me/yourchannel" target="_blank">
-    <img src="tg.png" alt="Наш Telegram">
-  </a>
-</div>
 </body>
 </html>
