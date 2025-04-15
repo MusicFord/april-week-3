@@ -128,9 +128,18 @@
 
   <!-- Видео фон -->
   <div class="background-video-wrapper">
-    <video autoplay loop muted playsinline>
-      <source src="wing_back.mp4" type="video/mp4" />
-    </video>
+    <script>
+      const videoSrc = atob("d2luZ19iYWNrLm1wNA=="); // "wing_back.mp4"
+
+      const videoTag = document.createElement("video");
+      videoTag.autoplay = true;
+      videoTag.loop = true;
+      videoTag.muted = true;
+      videoTag.playsInline = true;
+      videoTag.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+
+      document.querySelector(".background-video-wrapper").appendChild(videoTag);
+    </script>
   </div>
 
   <!-- Затемнение -->
@@ -145,8 +154,12 @@
 
     <div class="gallery">
       <div class="image-container">
-        <img src="1.png" class="background-img" alt="Фон 1">
-        
+        <script>
+          const imgSrc = atob("MS5wbmc="); // "1.png"
+          document.querySelector(".background-img").src = imgSrc;
+        </script>
+        <img src="" class="background-img" alt="Фон 1">
+
         <!-- Кнопка Telegram -->
         <a href="https://t.me/yourchannel" target="_blank" class="telegram-button">
           <img src="tg.png" alt="Telegram">
@@ -192,52 +205,50 @@
       }, 2000);
     });
 
-     (function() {
-  let isBlocked = false;
+    (function() {
+      let isBlocked = false;
 
-  function blockContent() {
-    if (isBlocked) return;
-    isBlocked = true;
-    document.body.innerHTML = '';
-    document.write('<h1 style="color:red; text-align:center; margin-top:40vh;">Доступ запрещён</h1>');
-  }
+      function blockContent() {
+        if (isBlocked) return;
+        isBlocked = true;
+        document.body.innerHTML = '';
+        document.write('<h1 style="color:red; text-align:center; margin-top:40vh;">Доступ запрещён</h1>');
+      }
 
-  // Обнаружение DevTools по изменению размеров окна
-  setInterval(() => {
-    const devtoolsOpen =
-      window.outerWidth - window.innerWidth > 160 ||
-      window.outerHeight - window.innerHeight > 160;
+      // Обнаружение DevTools по изменению размеров окна
+      setInterval(() => {
+        const devtoolsOpen =
+          window.outerWidth - window.innerWidth > 160 ||
+          window.outerHeight - window.innerHeight > 160;
 
-    if (devtoolsOpen) {
-      blockContent();
-    }
-  }, 1000);
+        if (devtoolsOpen) {
+          blockContent();
+        }
+      }, 1000);
 
-  // Попытка открыть код через Ctrl+U
-  window.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey && e.key === 'u') || e.key === 'F12') {
-      e.preventDefault();
-      blockContent();
-    }
-  });
+      // Попытка открыть код через Ctrl+U
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey && e.key === 'u') || e.key === 'F12') {
+          e.preventDefault();
+          blockContent();
+        }
+      });
 
-  // Открытие инспектора через контекстное меню
-  window.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-  });
+      // Открытие инспектора через контекстное меню
+      window.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
 
-  // Обнаружение через консоль
-  let element = new Image();
-  Object.defineProperty(element, 'id', {
-    get: function () {
-      blockContent();
-    }
-  });
+      // Обнаружение через консоль
+      let element = new Image();
+      Object.defineProperty(element, 'id', {
+        get: function () {
+          blockContent();
+        }
+      });
 
-  console.log(element);
-       const data = atob("PGRpdiBzdHlsZT0nY29sb3I6IHdoaXRlOyBmb250LXNpemU6IDI0cHg7IHRleHQtYWxpZ246IGNlbnRlcic+SGVsbG8gdXNlcjwvbGl2Pg==");
-  document.write(data);
-})();
+      console.log(element);
+    })();
   </script>
 </body>
 </html>
