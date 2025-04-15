@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>by_Music_Ford</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>madeByMusicF</title>
+
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
-      height: 100%;
       font-family: Arial, sans-serif;
-      color: white;
+      height: 100%;
       overflow-x: hidden;
+      scroll-behavior: smooth;
+    /* запасной фон */
     }
 
-    .background-video {
+    /* Видео фон */
+    .background-video-wrapper {
       position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -2;
+      overflow: hidden;
+    }
+
+    .background-video-wrapper video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
-    .overlay-video {
-       display: block;
-      margin: 100px auto 40px;
-      max-width: 80%;
-      height: auto;
-      z-index: 1;
-      pointer-events: none;
+    /* Затемнение */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
     }
 
-    .content {
+    /* Отступ вниз — вступительный экран */
+    .spacer {
+      height: 100vh;
+    }
+
+    /* Масштабирование содержимого */
+    .scaled-content-wrapper {
+      transform: scale(0.9);
+      transform-origin: top center;
       position: relative;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.6); /* Прозрачный фон */
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 0 auto 100px;
-      border-radius: 12px;
+      z-index: 1;
     }
 
-    .content h1 {
-      font-size: 50px;
-      margin: 60px 0 30px;
+    h2 {
+      color: white;
       text-align: center;
-    }
-    .content p {
-     font-size: 36px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  line-height: 1.6;
-      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .content img {
-      max-width: 100%;
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .image-container {
+      position: relative;
+      width: 75%;
+      cursor: default;
+      z-index: 20; /* повыше overlay и всего прочего */
+    }
+
+    .background-img {
+      width: 100%;
       display: block;
-      margin: 20px auto;
-      border-radius: 8px;
+      border-radius: 10px;
+      border: 3px solid #fff;
+      position: relative;
+      z-index: 20;
     }
-    .social-link {
+
+    /* Fade-in анимация */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+        .social-link {
   text-align: center;
   margin-top: 40px;
 }
@@ -86,31 +116,49 @@
 </head>
 <body>
 
-  <!-- Фоновое видео -->
-  <video class="background-video" autoplay muted loop>
-    <source src="wing_back.mp4" type="video/mp4">
+  <!-- Видео -->
+  <div class="background-video-wrapper">
+    <video autoplay loop muted playsinline>
+      <source src="wing_back.mp4" type="video/mp4" />
+    </video>
+  </div>
 
-  </video>
+  <!-- Затемнение -->
+  <div class="overlay"></div>
 
-  <!-- Видео-заголовок (WebM) -->
-  <video class="overlay-video" autoplay muted loop>
-    <source src="title.webm" type="video/webm">
-    
-  </video>
+  <!-- Экран-заставка -->
+  <div class="spacer"></div>
 
-<!-- Контент -->
-  <div class="content">
+  <!-- Основной контент -->
+  <div class="scaled-content-wrapper">
+    <h2 class="fade-in">made_by_MusicFord</h2>
 
-          <img src="1.png" alt="Картинка 21">  
+    <div class="gallery">
+      <div class="image-container">
+        <img src="1.png" class="background-img" alt="Фон 1">
+      </div>
+    </div>
+  </div>
 
+  <!-- Скрипт для анимации появления -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
 
-
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+  </script>
 <div class="social-link">
   <a href="https://t.me/yourchannel" target="_blank">
     <img src="tg.png" alt="Наш Telegram">
   </a>
 </div>
-  </div>
-
 </body>
 </html>
